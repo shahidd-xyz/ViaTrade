@@ -34,7 +34,7 @@ mongoose
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "via-trade-9a4c6jgs7-shahid2802.vercel.app",
     credentials: true,
   })
 );
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(session({
-    secret: "mysecret",
+    secret: process.env.TOKEN_KEY,
     resave: false,
     saveUninitialized: false
 }));
