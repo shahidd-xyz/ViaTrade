@@ -8,7 +8,6 @@ import {
   KeyboardArrowUp,
   BarChartOutlined,
   MoreHoriz,
-  WidthFull,
 } from "@mui/icons-material";
 
 import GeneralContext from "./GeneralContext";
@@ -97,7 +96,7 @@ function WatchListItem({ stock, isActive, setActiveStock }) {
           ) : (
             <KeyboardArrowUp className="up" />
           )}
-          <span className="price" className={stock.isDown ? "down" : "up"}>
+          <span className={`price ${stock.isDown ? "down" : "up"}`}>
             {stock.price}
           </span>
         </div>

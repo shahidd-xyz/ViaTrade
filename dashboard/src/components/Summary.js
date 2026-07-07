@@ -6,20 +6,20 @@ const Summary = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function isAuth(){
-    try{
-      await axios("https://viatrade.onrender.com/isUser", {
-        withCredentials: true
-      });
+    async function isAuth() {
+      try {
+        await axios("https://viatrade.onrender.com/isUser", {
+          withCredentials: true,
+        });
 
-      navigate("/");
+        navigate("/");
+      } catch (err) {
+        alert("You're not logged in");
+        navigate("/login");
+      }
     }
-    catch(err){
-      alert("You're not logged in");
-      navigate("/login");
-    }
-    }
-  }, [])
+    isAuth();
+  }, [navigate]);
 
   return (
     <>
