@@ -36,23 +36,19 @@ const allowedCors = ["https://via-trade.vercel.app", "http://localhost:3000"];
 
 app.use(
   cors({
-    origin(origin, callback) {
-      if (!origin) return callback(null, true);
+    origin: (origin, callback) => {
+      console.log("Incoming Origin:", origin);
+
+      if (!origin) {
+        return callback(null, true);
+      }
 
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
-    },
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
+      console.log("Blocked Origin:", origin);
+      callback(new Error("CORS blocked"));
     },
     credentials: true,
   }),
@@ -65,6 +61,13 @@ app.use(
     secret: process.env.TOKEN_KEY,
     resave: false,
     saveUninitialized: false,
+    proxy: true,
+    cookie: {
+      httpOnly: true,
+      secure: true,      // Render uses HTTPS
+      sameSite: "none",  // Required for different origins
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   }),
 );
 app.use(passport.initialize());
@@ -271,6 +274,13 @@ app.post("/login", passport.authenticate("local"), Login);
 app.post("/logout", Logout);
 
 app.get("/isUser", isLoggedIn);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: err.message,
+  });
+});
 
 app.listen(PORT, () => {
   console.log("Listening on port 8080");
