@@ -26,7 +26,7 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
 
     const fetchPrice = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/getCurrPrice", {
+        const res = await axios.get("https://viatrade.onrender.com/getCurrPrice", {
           params: { name: uid },
           withCredentials: true,
         });
@@ -39,7 +39,7 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
 
     const fetchHoldings = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/allHoldings", {
+        const res = await axios.get("https://viatrade.onrender.com/allHoldings", {
           withCredentials: true,
         });
         const holdings = Array.isArray(res.data) ? res.data : [];
@@ -81,7 +81,7 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
   const handleBuyClick = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/newOrder",
+        "https://viatrade.onrender.com/newOrder",
         {
           name: uid,
           qty: numericQuantity,
@@ -92,10 +92,10 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
       );
 
       if (response?.data?.message) {
-        await axios.get("http://localhost:8080/allHoldings", {
+        await axios.get("https://viatrade.onrender.com/allHoldings", {
           withCredentials: true,
         });
-        await axios.get("http://localhost:8080/allOrders", {
+        await axios.get("https://viatrade.onrender.com/allOrders", {
           withCredentials: true,
         });
       }
@@ -110,7 +110,7 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
   const handleSellClick = async () => {
     try {
       await axios.post(
-        "http://localhost:8080/deleteOrder",
+        "https://viatrade.onrender.com/deleteOrder",
         {
           name: uid,
           qty: numericQuantity,
@@ -120,10 +120,10 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
         },
       );
 
-      await axios.get("http://localhost:8080/allHoldings", {
+      await axios.get("https://viatrade.onrender.com/allHoldings", {
         withCredentials: true,
       });
-      await axios.get("http://localhost:8080/allOrders", {
+      await axios.get("https://viatrade.onrender.com/allOrders", {
         withCredentials: true,
       });
 

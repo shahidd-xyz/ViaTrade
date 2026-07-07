@@ -62,7 +62,7 @@ function Menu() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8080/logout",
+        "https://viatrade.onrender.com/logout",
         {},
         { withCredentials: true }
       );

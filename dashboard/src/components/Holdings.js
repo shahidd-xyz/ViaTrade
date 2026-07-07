@@ -10,7 +10,7 @@ function Holdings() {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/allHoldings", {withCredentials: true}).then((res) => {
+    axios.get("https://viatrade.onrender.com/allHoldings", {withCredentials: true}).then((res) => {
       console.log(res.data);
       setAllHoldings(res.data);
     });

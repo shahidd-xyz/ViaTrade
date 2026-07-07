@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
 
     const checkAuth = async () => {
       try {
-        await axios.get("http://localhost:8080/isUser", {
+        await axios.get("https://viatrade.onrender.com/isUser", {
           withCredentials: true,
         });
 

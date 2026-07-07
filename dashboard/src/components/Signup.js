@@ -31,7 +31,7 @@ function Signup() {
     validate,
     onSubmit: async (values) => {
       try {
-        const res = await axios.post("http://localhost:8080/signup", values, {
+        const res = await axios.post("https://viatrade.onrender.com/signup", values, {
           withCredentials: true,
         });
 

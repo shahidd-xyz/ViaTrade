@@ -8,7 +8,7 @@ const Summary = () => {
   useEffect(() => {
     async function isAuth(){
     try{
-      await axios("http://localhost:8080/isUser", {
+      await axios("https://viatrade.onrender.com/isUser", {
         withCredentials: true
       });
 

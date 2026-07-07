@@ -6,26 +6,12 @@ const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(()=>{
-    axios.get("http://localhost:8080/allOrders", {withCredentials:true}).then((res)=>{
+    axios.get("https://viatrade.onrender.com/allOrders", {withCredentials:true}).then((res)=>{
       setAllOrders(res.data);
     });
   });
 
   return (
-    // <div className="orders">
-    //   <div className="no-orders">
-    //     <p>You haven't placed any orders today</p>
-
-    //     <Link to={"/"} className="btn">
-    //       Get started
-    //     </Link>
-    //   </div>
-    // </div>
-
-
-
-
-
     <>
       <h3 className="title fs-3">Orders ({allOrders.length})</h3>
 
