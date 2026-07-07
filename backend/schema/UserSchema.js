@@ -1,5 +1,5 @@
 const { Schema } = require("mongoose");
-const passportLocalMongoose = require("passport-local-mongoose");
+const passportLocalMongoose = require("passport-local-mongoose").default;
 
 const UserSchema = new Schema({
   email: {
