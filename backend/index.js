@@ -34,7 +34,7 @@ mongoose
 
 app.use(
   cors({
-    origin: "https://via-trade-905yi1bdv-shahid2802.vercel.app",
+    origin: "https://via-trade.vercel.app",
     credentials: true,
   })
 );
