@@ -49,7 +49,7 @@ function Login() {
       setLoginError("");
       try {
         const res = await axios.post(
-          "https://viatrade.onrender.com:8080/login",
+          "https://viatrade.onrender.com/login",
           values,
           {
             withCredentials: true,
