@@ -1,0 +1,724 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.nav-link{
+  margin-left: 40px;
+}
+
+.navbar-collapse .d-flex {
+  margin-left: auto;
+}
+
+.navbar-brand img {
+  width: auto !important;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+/* SupportPage */
+
+#supportHero{
+  background-color: rgb(56, 126, 209);
+  color: white;
+}
+
+#supportHero a{
+  color: white;
+}
+
+#supportWrapper{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 150px;
+}
+
+#supportHero input{
+  padding: 15px 50px;
+  width: 90%;
+  font-size: 20px;
+  border: none;
+  border-radius: 7px;
+}
+
+/* =============================================
+   RESPONSIVE MEDIA QUERIES
+   ============================================= */
+
+/* ---------- Collapsed Navbar (Bootstrap lg breakpoint) ---------- */
+@media (max-width: 991.98px) {
+  .navbar.navbar-expand-lg {
+    height: auto !important;
+    min-height: 80px;
+    background-color: #fff !important;
+  }
+
+  .navbar.navbar-expand-lg > .container {
+    flex-wrap: wrap;
+  }
+
+  .navbar.navbar-expand-lg .navbar-collapse,
+  .navbar.navbar-expand-lg .navbar-collapse.collapsing,
+  .navbar.navbar-expand-lg .navbar-collapse.show {
+    position: static;
+    flex-basis: 100%;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #e9ecef;
+  }
+
+  .navbar.navbar-expand-lg .navbar-collapse.collapsing {
+    overflow: hidden;
+    transition: height 0.35s ease;
+  }
+
+  .navbar.navbar-expand-lg .navbar-collapse .d-flex,
+  .navbar.navbar-expand-lg .navbar-nav {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .navbar.navbar-expand-lg .navbar-nav {
+    padding: 0.75rem 0 1rem;
+  }
+
+  .navbar.navbar-expand-lg .nav-link {
+    display: block;
+    margin-left: 0;
+    padding: 0.65rem 1rem;
+  }
+}
+
+/* ---------- Tablet & Below (max-width: 768px) ---------- */
+@media (max-width: 768px) {
+
+  /* --- Products Page --- */
+  /* .container.mt-5 > .row > .col-6:has(> img[alt="Left Section Image Url"]),
+  .container.mt-5 > .row > .col-6:has(> img[alt="Right Section Image Url"]) {
+    order: -1;
+  }
+
+  .container.mt-5 > .row > .col-6 > img[alt="Left Section Image Url"],
+  .container.mt-5 > .row > .col-6 > img[alt="Right Section Image Url"] {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  } */
+
+  .container.mt-5 > .row > .col-6:has(> img[alt="Left Section Image Url"]),
+  .container.mt-5 > .row > .col-6:has(> img[alt="Right Section Image Url"]) {
+    order: -1;
+  }
+
+  .container.mt-5 > .row > .col-6 > img[alt="Left Section Image Url"],
+  .container.mt-5 > .row > .col-6 > img[alt="Right Section Image Url"] {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  #googleplay1{
+    height: 30px;
+    width: 20px;
+  }
+
+  .container.mt-5 > .row:has(img[src="media/images/console.png"]) > .col-6.p-5.mt-5 {
+    margin-top: 0 !important;
+    padding-top: 1rem !important;
+  }
+
+  .container.mt-5 > .row:has(img[src="media/images/console.png"]) h1.mt-5 {
+    margin-top: 0 !important;
+  }
+
+  .container.mt-5 img[alt="Google Play Image"],
+  .container.mt-5 img[alt="App Store Image"] {
+    width: 135px !important;
+    max-width: 42vw;
+    height: auto;
+  }
+
+  .container.mt-5 > .row:has(img[src="media/images/console.png"]) > .col-6.p-5.mt-5 {
+    margin-top: 0 !important;
+    padding-top: 1rem !important;
+  }
+
+  .container.mt-5 > .row:has(img[src="media/images/console.png"]) h1.mt-5 {
+    margin-top: 0 !important;
+  }
+
+  .container.mt-5 img[alt="Google Play Image"],
+  .container.mt-5 img[alt="App Store Image"] {
+    width: 135px !important;
+    max-width: 42vw;
+    height: auto;
+  }
+
+  /* --- Navbar --- */
+  .nav-link {
+    margin-left: 0;
+  }
+
+  .navbar-brand img {
+    height: 55px !important;
+    width: 80px;
+  }
+
+  .navbar-nav {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  /* --- Hero Section --- */
+  .container .row.text-center img.img-fluid {
+    width: 95% !important;
+  }
+
+  .container .row.text-center .btn.btn-primary {
+    width: 60% !important;
+  }
+
+  /* --- Awards Section --- */
+  .container.mt-5 > .row > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Best Broker"]) {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Best Broker"]) > .col-6 {
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+  }
+
+  .container.mt-5 img[alt="Best Broker"] {
+    display: block;
+    width: 100% !important;
+    max-width: 480px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Best Broker"]) > .col-6:last-child {
+    margin-top: 1rem !important;
+    overflow-wrap: anywhere;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Best Broker"]) > .col-6:last-child > img {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Best Broker"]) ul {
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 1.25rem;
+  }
+
+  #googleplay1,
+  #googleplay2 {
+    width: 135px !important;
+    max-width: 42vw !important;
+    height: auto !important;
+  }
+
+  .container.mt-5 > .row > .col-6 .row > .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  /* --- Stats Section --- */
+  .container.pt-5.mt-5 > .row > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .container.pt-5.mt-5 > .row > .col-6 img {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .container.pt-5.mt-5 > .row > .col-6.text-center {
+    margin-top: 30px;
+  }
+
+  .container.pt-5.mt-5 > .row > .col-6.text-center .text-center a {
+    display: block;
+    margin: 10px auto !important;
+  }
+
+  /* --- Pricing Section --- */
+  .container.mt-5.p-5.mb-5 > .row > .col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .container.mt-5.p-5.mb-5 > .row > .col-2 {
+    display: none;
+  }
+
+  .container.mt-5.p-5.mb-5 > .row > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .container.mt-5.p-5.mb-5 > .row > .col-4 a {
+    margin-left: 0 !important;
+  }
+
+  /* --- Pricing Page Hero --- */
+  .container.border-bottom > .row.p-5.mt-5 {
+    padding: 1rem !important;
+  }
+
+  .container.border-bottom > .row.p-5.mt-5:not(.text-center) > .col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .container.border-bottom > .row.p-5.mt-5:not(.text-center) > .col-4 > img {
+    display: block;
+    width: min(180px, 55vw);
+    height: auto;
+    margin: 0 auto 1.25rem;
+  }
+
+  .container.border-bottom > .row.p-5.mt-5:not(.text-center) > .col-4 > p {
+    margin-top: 1rem !important;
+  }
+
+  /* --- Pricing Page Brokerage --- */
+  .container > .row.p-5.mt-5:has(ul.text-left) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1rem !important;
+  }
+
+  .container > .row.p-5.mt-5:has(ul.text-left) > .col-8,
+  .container > .row.p-5.mt-5:has(ul.text-left) > .col-4 {
+    display: contents;
+  }
+
+  .container > .row.p-5.mt-5:has(ul.text-left) > .col-8 > a,
+  .container > .row.p-5.mt-5:has(ul.text-left) > .col-4 > a {
+    min-width: 0;
+    padding: 0 0.25rem;
+  }
+
+  .container > .row.p-5.mt-5:has(ul.text-left) h3 {
+    font-size: 1rem !important;
+  }
+
+  .container > .row.p-5.mt-5:has(ul.text-left) > .col-4 h3 {
+    display: none;
+  }
+
+  .container > .row.p-5.mt-5:has(ul.text-left) ul {
+    grid-column: 1 / -1;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 1.5rem !important;
+    padding-left: 1.25rem;
+    overflow-wrap: anywhere;
+  }
+
+  .container > .row.p-5.mt-5:has(ul.text-left) li {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- About Page Hero --- */
+  .container > .row.p-5.mt-5.border-top.text-muted {
+    padding: 1rem !important;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 !important;
+  }
+
+  .container > .row.p-5.mt-5.border-top.text-muted p {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  /* --- About Page Team --- */
+  .container > .row.p-5.text-muted:has(img[alt="Founder"]) {
+    padding: 1rem !important;
+  }
+
+  .container > .row.p-5.text-muted:has(img[alt="Founder"]) > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 1rem 0 !important;
+  }
+
+  .container > .row.p-5.text-muted:has(img[alt="Founder"]) img[alt="Founder"] {
+    display: block;
+    width: min(260px, 70vw) !important;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .container > .row.p-5.text-muted:has(img[alt="Founder"]) p {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  /* --- Education Section --- */
+  .container.mt-5 > .row:has(img[alt="Varsity Image"]) {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Varsity Image"]) > .col-6 {
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .container.mt-5 > .row > .col-6 img[alt="Varsity Image"] {
+    display: block;
+    width: 100% !important;
+    max-width: 480px;
+    height: auto;
+    margin: 0 auto 2rem;
+  }
+
+  .container.mt-5 > .row:has(img[alt="Varsity Image"]) > .col-6:last-child {
+    padding-left: 1.25rem;
+    overflow-wrap: anywhere;
+  }
+
+  /* --- OpenAccount Section --- */
+  .container.p-5.mt-5.mb-5 .btn.btn-primary {
+    width: 60% !important;
+  }
+
+  /* --- Footer --- */
+  .container-fluid.border-top.mt-5.p-5 > .row.mt-5 > .col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 25px;
+  }
+
+  .container-fluid.border-top.mt-5.p-5 .row.text-muted {
+    flex-wrap: wrap;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .container-fluid.border-top.mt-5.p-5 .row.text-muted > .col {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  /* --- Support Page --- */
+  #supportWrapper {
+    flex-direction: column;
+    margin: 0 20px;
+  }
+
+  #supportHero input {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  /* --- Support Hero --- */
+  #supportHero > .row.p-5.m-3 {
+    margin: 0 !important;
+    padding: 1.5rem !important;
+  }
+
+  #supportHero > .row.p-5.m-3 > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 1rem 0 !important;
+  }
+
+  #supportHero > .row.p-5.m-3 > .col-6:first-child {
+    order: 1;
+  }
+
+  #supportHero > .row.p-5.m-3 > .col-6:last-child {
+    order: 2;
+    margin-top: 1.5rem;
+  }
+
+  #supportHero input {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #supportHero > .row.p-5.m-3 > .col-6:first-child > a {
+    display: inline-block;
+    margin: 0.75rem 0.75rem 0 0 !important;
+  }
+
+  #supportHero ol {
+    padding-left: 1.5rem;
+  }
+
+  #supportHero ol li {
+    margin-bottom: 0.75rem;
+  }
+
+  /* --- Create Ticket --- */
+  .container > .row.p-5.mb-5.mt-5:has(.fa-circle-plus) {
+    margin-top: 1.5rem !important;
+    padding: 1rem !important;
+  }
+
+  .container > .row.p-5.mb-5.mt-5:has(.fa-circle-plus) > h3 {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .container > .row.p-5.mb-5.mt-5:has(.fa-circle-plus) > .col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin: 0 0 1rem !important;
+    padding: 1.25rem !important;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .container > .row.p-5.mb-5.mt-5:has(.fa-circle-plus) h5 {
+    margin-bottom: 1rem !important;
+    line-height: 1.4;
+  }
+
+  .container > .row.p-5.mb-5.mt-5:has(.fa-circle-plus) > .col-4 > a {
+    display: block;
+    padding: 0.4rem 0;
+    line-height: 1.5 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .container > .row.p-5.mb-5.mt-5:has(.fa-circle-plus) > .col-4 > br {
+    display: none;
+  }
+
+  /* --- Products Universe Cards --- */
+  .container.mt-5 > .row.text-center.p-5:has(img[alt="Universe Image"]) {
+    padding: 1rem !important;
+  }
+
+  .container.mt-5 > .row.text-center.p-5:has(img[alt="Universe Image"]) > .col-4 {
+    display: flex;
+    flex: 0 0 100%;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    min-height: 230px;
+    margin: 0 0 1rem !important;
+    padding: 1.5rem !important;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .container.mt-5 > .row.text-center.p-5:has(img[alt="Universe Image"]) img[alt="Universe Image"] {
+    order: 1;
+    width: auto !important;
+    max-width: 75%;
+    height: 65px;
+    object-fit: contain;
+  }
+
+  .container.mt-5 > .row.text-center.p-5:has(img[alt="Universe Image"]) > .col-4 > p {
+    order: 2;
+    width: 100%;
+    margin: 1.25rem 0 0 !important;
+    line-height: 1.7;
+  }
+
+  .container.mt-5 > .row.text-center.p-5:has(img[alt="Universe Image"]) > .btn {
+    width: min(260px, 85%) !important;
+  }
+}
+
+/* ---------- Mobile (max-width: 576px) ---------- */
+@media (max-width: 576px) {
+
+  /* --- Navbar --- */
+  .navbar-brand img {
+    height: 45px !important;
+  }
+
+  /* --- Hero Section --- */
+  .container .row.text-center img.img-fluid {
+    width: 100% !important;
+  }
+
+  .container .row.text-center h1 {
+    font-size: 1.75rem;
+  }
+
+  .container .row.text-center .btn.btn-primary {
+    width: 80% !important;
+    font-size: 1rem !important;
+    padding: 12px 15px !important;
+  }
+
+  /* --- Awards Section --- */
+  .container.mt-5 > .row > .col-6 h2 {
+    font-size: 1.5rem;
+  }
+
+  .container.mt-5 > .row > .col-6 .row > .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* --- Stats Section --- */
+  .container.pt-5.mt-5 > .row {
+    padding: 1rem !important;
+  }
+
+  .container.pt-5.mt-5 > .row > .col-6 h2 {
+    font-size: 1.5rem;
+  }
+
+  .container.pt-5.mt-5 > .row > .col-6 h3 {
+    font-size: 1.15rem;
+  }
+
+  /* --- Pricing Section --- */
+  .container.mt-5.p-5.mb-5 {
+    padding: 1.5rem !important;
+  }
+
+  .container.mt-5.p-5.mb-5 > .row > .col-6 .row .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    border-right: none !important;
+    margin-bottom: 10px;
+  }
+
+  .container.mt-5.p-5.mb-5 h2 {
+    font-size: 1.4rem;
+  }
+
+  /* --- Education Section --- */
+  .container.mt-5 > .row > .col-6 h2 {
+    font-size: 1.4rem;
+  }
+
+  /* --- OpenAccount Section --- */
+  .container.p-5.mt-5.mb-5 {
+    padding: 1.5rem !important;
+  }
+
+  .container.p-5.mt-5.mb-5 h2 {
+    font-size: 1.5rem;
+  }
+
+  .container.p-5.mt-5.mb-5 .btn.btn-primary {
+    width: 85% !important;
+  }
+
+  /* --- Footer --- */
+  .container-fluid.border-top.mt-5.p-5 {
+    padding: 1.5rem !important;
+  }
+
+  .container-fluid.border-top.mt-5.p-5 > .row.mt-5 > .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .container-fluid.border-top.mt-5.p-5 .mt-5.text-small.text-muted {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .container-fluid.border-top.mt-5.p-5 .row.text-muted > .col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .fw-medium.fs-5 {
+    font-size: 1.1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* --- Support Page --- */
+  #supportWrapper {
+    margin: 0 10px;
+  }
+
+  #supportHero input {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
+/* ---------- Small Mobile (max-width: 400px) ---------- */
+@media (max-width: 400px) {
+
+  .container .row.text-center h1 {
+    font-size: 1.4rem;
+  }
+
+  .container .row.text-center .btn.btn-primary {
+    width: 90% !important;
+    font-size: 0.95rem !important;
+  }
+
+  .container.p-5.mt-5.mb-5 .btn.btn-primary {
+    width: 95% !important;
+  }
+
+  .container-fluid.border-top.mt-5.p-5 .row.text-muted > .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .container.mt-5.p-5.mb-5 > .row > .col-6 .row .col h2 {
+    font-size: 1.5rem;
+  }
+}
