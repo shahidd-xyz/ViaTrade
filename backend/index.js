@@ -32,23 +32,43 @@ mongoose
     console.log(err);
   });
 
+const allowedCors = ["https://via-trade.vercel.app", "http://localhost:3000"];
+
 app.use(
   cors({
-    origin: "https://via-trade.vercel.app",
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
-  })
+  }),
 );
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(session({
+app.use(
+  session({
     secret: process.env.TOKEN_KEY,
     resave: false,
-    saveUninitialized: false
-}));
+    saveUninitialized: false,
+  }),
+);
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // app.get("/addStocks", (req, res) => {
 //   let tempStocks = [
@@ -241,7 +261,6 @@ app.post("/newOrder", ensureAuth, newOrder);
 app.post("/deleteOrder", ensureAuth, deleteOrder);
 app.delete("/deleteOrder", ensureAuth, deleteOrder);
 
-
 //Authentication & Authorization
 
 app.post("/signup", Signup);
@@ -252,8 +271,6 @@ app.post("/login", passport.authenticate("local"), Login);
 app.post("/logout", Logout);
 
 app.get("/isUser", isLoggedIn);
-
-
 
 app.listen(PORT, () => {
   console.log("Listening on port 8080");
