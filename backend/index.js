@@ -57,6 +57,7 @@ mongoose
 app.use(
   cors({
     origin: "https://viatrade.vercel.app",
+    credentials: true,
   }),
 );
 
