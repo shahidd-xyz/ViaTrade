@@ -10,6 +10,7 @@ const passport = require("./config/passport");
 const cookieParser = require("cookie-parser");
 
 const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo");
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
@@ -72,6 +73,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     proxy: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URL,
+    }),
     cookie: {
       httpOnly: true,
       secure: true, // Render uses HTTPS
