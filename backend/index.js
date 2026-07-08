@@ -20,7 +20,7 @@ const { UserModel } = require("./model/UserModel");
 const { StockModel } = require("./model/StockSchema");
 
 const { Signup, Login, Logout } = require("./Controllers/AuthController");
-const { isLoggedIn, ensureAuth } = require("./Middlewares/AuthMiddleware");
+const { ensureAuth } = require("./Middlewares/AuthMiddleware");
 const { newOrder, getCurrPrice, deleteOrder } = require("./Controllers/Order");
 
 const PORT = process.env.PORT || 8080;
@@ -122,7 +122,9 @@ app.get("/debug-session", (req, res) => {
   });
 });
 
-app.get("/isUser", isLoggedIn);
+app.get("/isUser", ensureAuth, (req,res) => {
+  res.sendStatus(200);
+});
 
 app.listen(PORT, () => {
   console.log("Listening on port 8080");
