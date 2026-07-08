@@ -32,27 +32,30 @@ mongoose
     console.log(err);
   });
 
-const allowedCors = ["https://via-trade.vercel.app", "http://localhost:3000"];
+// const allowedCors = ["https://via-trade.vercel.app", "http://localhost:3000"];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      console.log("Incoming Origin:", origin);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       console.log("Incoming Origin:", origin);
 
-      if (!origin) {
-        return callback(null, true);
-      }
+//       if (!origin) {
+//         return callback(null, true);
+//       }
 
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+//       if (allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       }
 
-      console.log("Blocked Origin:", origin);
-      callback(new Error("CORS blocked"));
-    },
-    credentials: true,
-  }),
-);
+//       console.log("Blocked Origin:", origin);
+//       callback(new Error("CORS blocked"));
+//     },
+//     credentials: true,
+//   }),
+// );
+
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -275,12 +278,6 @@ app.post("/logout", Logout);
 
 app.get("/isUser", isLoggedIn);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    error: err.message,
-  });
-});
 
 app.listen(PORT, () => {
   console.log("Listening on port 8080");
