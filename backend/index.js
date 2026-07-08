@@ -54,7 +54,11 @@ mongoose
 //   }),
 // );
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://viatrade.vercel.app",
+  }),
+);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -67,8 +71,8 @@ app.use(
     proxy: true,
     cookie: {
       httpOnly: true,
-      secure: true,      // Render uses HTTPS
-      sameSite: "none",  // Required for different origins
+      secure: true, // Render uses HTTPS
+      sameSite: "none", // Required for different origins
       maxAge: 24 * 60 * 60 * 1000,
     },
   }),
@@ -277,7 +281,6 @@ app.post("/login", passport.authenticate("local"), Login);
 app.post("/logout", Logout);
 
 app.get("/isUser", isLoggedIn);
-
 
 app.listen(PORT, () => {
   console.log("Listening on port 8080");
