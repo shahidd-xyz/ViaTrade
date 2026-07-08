@@ -23,6 +23,8 @@ const { newOrder, getCurrPrice, deleteOrder } = require("./Controllers/Order");
 const PORT = process.env.PORT || 8080;
 const uri = process.env.MONGO_URL;
 
+app.set("trust proxy", 1);
+
 mongoose
   .connect(uri)
   .then(() => {
@@ -280,6 +282,18 @@ app.post("/register", Signup);
 app.post("/login", passport.authenticate("local"), Login);
 
 app.post("/logout", Logout);
+
+app.get("/debug-session", (req, res) => {
+  console.log("Session:", req.session);
+  console.log("User:", req.user);
+  console.log("Authenticated:", req.isAuthenticated());
+
+  res.json({
+    session: req.session,
+    user: req.user,
+    authenticated: req.isAuthenticated(),
+  });
+});
 
 app.get("/isUser", isLoggedIn);
 
