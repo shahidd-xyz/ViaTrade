@@ -59,7 +59,7 @@ function Login() {
         console.log(res.data);
         setTimeout(() => {
           navigate("/");
-        }, 600);
+        }, 200);
       } catch (err) {
         console.log(err.response?.data);
         const message =

@@ -15,7 +15,7 @@ function Menu() {
     let isMounted = true;
 
     axios
-      .get("https://viatrade.vercel.app/isUser", { withCredentials: true })
+      .get("https://viatrade.onrender.com/isUser", { withCredentials: true })
       .then((res) => {
         if (isMounted && res.data?.user) {
           setUser(res.data.user);
