@@ -26,7 +26,7 @@ const { newOrder, getCurrPrice, deleteOrder } = require("./Controllers/Order");
 const PORT = process.env.PORT || 8080;
 const uri = process.env.MONGO_URL;
 
-app.set("trust proxy", 1);
+app.set("trust proxy", true);
 
 mongoose
   .connect(uri)
