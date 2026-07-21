@@ -15,7 +15,7 @@ function Menu() {
     let isMounted = true;
 
     axios
-      .get("http://localhost:8080/isUser", { withCredentials: true })
+      .get("https://viatrade.vercel.app/isUser", { withCredentials: true })
       .then((res) => {
         if (isMounted && res.data?.user) {
           setUser(res.data.user);
