@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV != "production"){
+if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
 
@@ -37,7 +37,6 @@ mongoose
     console.log(err);
   });
 
-
 app.use(
   cors({
     origin: "https://viatrade.vercel.app",
@@ -53,11 +52,11 @@ const store = MongoStore.create({
   crypto: {
     secret: process.env.TOKEN_KEY,
   },
-  touchAfter: 24 *3600, //seconds - 24hours
+  touchAfter: 24 * 3600, //seconds - 24hours
 });
 
-store.on("error", ()=>{
-    console.log("Error in Mongo Session Store");
+store.on("error", () => {
+  console.log("Error in Mongo Session Store");
 });
 
 app.use(
@@ -73,14 +72,12 @@ app.use(
       httpOnly: true,
       secure: true,
       sameSite: "none",
-    }
-  })
+    },
+  }),
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 app.get("/allHoldings", ensureAuth, async (req, res) => {
   const allHoldings = await HoldingsModel.find({ user: req.user._id });
@@ -124,8 +121,11 @@ app.get("/debug-session", (req, res) => {
   });
 });
 
-app.get("/isUser", ensureAuth, (req,res) => {
-  res.sendStatus(200);
+app.get("/isUser", ensureAuth, (req, res) => {
+  res.json({
+    success: true,
+    user: req.user,
+  });
 });
 
 app.listen(PORT, () => {
