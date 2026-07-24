@@ -58,7 +58,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="/products"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -207,11 +207,11 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
-              Zerodha Cares (CSR)
+              ViaTrade Cares (CSR)
             </a>
             <br />
             <br />
@@ -233,7 +233,7 @@ function Footer() {
             </a>
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
