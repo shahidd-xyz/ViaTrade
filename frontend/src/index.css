@@ -396,6 +396,10 @@ code {
     margin-bottom: 1.25rem;
   }
 
+  .aboutparagraph{
+    font-size: 12px;
+  }
+
   /* --- Education Section --- */
   .container.mt-5 > .row:has(img[alt="Varsity Image"]) {
     width: 100%;
