@@ -15,15 +15,15 @@ function Team() {
           <img
             src="media/images/shahid_image.jpeg"
             alt="Founder"
-            style={{ borderRadius: "100%", width: "65%" }}
+            style={{ borderRadius: "100%", width: "75%", height: "105vh"}}
           />
           <h4 className="mt-5">Shahid Ansari</h4>
           <h6 className="mt-4 text-muted">Founder, CEO</h6>
         </div>
         <div className="col-6 p-5">
-            <p>Nithin bootstrapped and founded Zerodha in 2010 to overcome the hurdles he faced during his decade long stint as a trader. Today, Zerodha has changed the landscape of the Indian broking industry.</p>
-            <p>He is a member of the SEBI Secondary Market Advisory Committee (SMAC) and the Market Data Advisory Committee (MDAC).</p>
-            <p>Playing basketball is his zen.</p>
+            <p>As a Software Engineer, I am committed to building reliable and scalable software that solves real-world problems. I approach every project with analytical thinking, precision, and attention to quality. I believe in creating maintainable solutions that deliver long-term value. Continuous learning and professional growth remain central to my development.</p>
+            <p>I value clean software design, structured problem-solving, and consistent engineering practices. Every challenge is an opportunity to develop efficient and practical solutions. I strive to deliver work that balances quality, performance, and reliability. Collaboration, adaptability, and accountability guide my professional approach.</p>
+            <p>My objective is to contribute to meaningful products while maintaining high engineering standards. I continuously improve my knowledge to stay aligned with evolving industry practices. I am driven by curiosity, discipline, and a commitment to excellence. I aim to create software that delivers lasting impact and measurable value.</p>
             <p>Connect on <a href="/" style={{textDecoration: "none"}}>Homepage</a> / <a href="/support" style={{textDecoration: "none"}}>TradingQ&A</a> / <a href="https://x.com" style={{textDecoration: "none"}}>Twitter</a></p>
         </div>
       </div>
