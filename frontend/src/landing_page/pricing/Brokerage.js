@@ -5,7 +5,7 @@ function Brokerage() {
     <div className="container">
       <div className="row p-5 mt-5">
         <div className="col-8 p-3">
-          <a href="" style={{ textDecoration: "none" }}>
+          <a href="https://viatrade-dashboard.vercel.app/signup" style={{ textDecoration: "none" }}>
             <h3 className="text-center fs-5">Brokerage Calculator</h3>
           </a>
 
@@ -35,7 +35,7 @@ function Brokerage() {
         </div>
 
         <div className="col-4 p-3">
-          <a href="" style={{ textDecoration: "none" }}>
+          <a href="https://viatrade-dashboard.vercel.app/signup" style={{ textDecoration: "none" }}>
             <h3 className="fs-5 text-center">List of charges</h3>
           </a>
         </div>

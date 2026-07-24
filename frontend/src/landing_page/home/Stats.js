@@ -34,10 +34,10 @@ function Stats() {
           </p>
         </div>
         <div className="col-6 text-center">
-          <img src="media/images/ecosystem.png" style={{ width: "90%" }} />
+          <img src="media/images/ecosystem.png" alt="Ecosystem" style={{ width: "90%" }} />
           <div className="text-center mt-4">
-            <a href="" className="mx-5" style={{textDecoration: "none"}}>Explore our products <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="" style={{textDecoration: "none"}}>Try Kite demo <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/products" className="mx-5" style={{textDecoration: "none"}}>Explore our products <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://viatrade-dashboard.vercel.app/signup" style={{textDecoration: "none"}}>Try Kite demo <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>

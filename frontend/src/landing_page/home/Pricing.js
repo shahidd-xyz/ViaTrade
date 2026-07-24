@@ -8,7 +8,7 @@ function Pricing() {
                     <h2 className='mb-3 fs-2'>Unbeatable Pricing</h2>
                     
                     <p>We pioneered the concept of discount broking and price transparency in India. Flat fees and no hidden charges.</p>
-                    <a href="" className="mx-5" style={{textDecoration: "none"}}>Explore our products <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="/products" className="mx-5" style={{textDecoration: "none"}}>Explore our products <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div className="col-2"></div>
                 <div className="col-6">

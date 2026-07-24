@@ -5,7 +5,7 @@ function Hero() {
     <div className="container-fluid" id="supportHero">
       <div className="p-4" id="supportWrapper">
         <h2 className="fs-3">Support Portal</h2>
-        <h2 className="fs-4"><a href="" style={{textDecoration: "none"}}>Track Tickets</a></h2>
+        <h2 className="fs-4"><a href="https://viatrade-dashboard.vercel.app/signup" style={{textDecoration: "none"}}>Track Tickets</a></h2>
       </div>
 
       <div className="row p-5 m-3">
@@ -17,19 +17,19 @@ function Hero() {
             className="mt-3"
           />
           <br />
-          <a href="">Track account opening</a>
-          <a href="" className="ms-4">Track segment activation</a>
-          <a href="" className="ms-4">Intraday margins</a>
-          <a href="" className="ms-4">Kite user manual</a>
+          <a href="https://viatrade-dashboard.vercel.app/signup">Track account opening</a>
+          <a href="https://viatrade-dashboard.vercel.app/signup" className="ms-4">Track segment activation</a>
+          <a href="https://viatrade-dashboard.vercel.app/signup" className="ms-4">Intraday margins</a>
+          <a href="https://viatrade-dashboard.vercel.app/signup" className="ms-4">Kite user manual</a>
         </div>
         <div className="col-6 p-5">
           <h1 className="fs-3">Featured</h1>
           <ol type="1">
             <li>
-              <a href="" className="mt-3">Current Takeovers and Delisting - January 2026</a>
+              <a href="https://viatrade-dashboard.vercel.app/signup" className="mt-3">Current Takeovers and Delisting - January 2026</a>
             </li>
             <li className="mt-3">
-              <a href="">Latest Intraday leverages - MIS & CO</a>
+              <a href="https://viatrade-dashboard.vercel.app/signup">Latest Intraday leverages - MIS & CO</a>
             </li>
           </ol>
         </div>

@@ -52,7 +52,7 @@ function ProductPage() {
         appStore=""
       />
 
-      <h4 className="text-center mt-5 p-5">Want to know more about our technology stack? Check out the <a href="" style={{textDecoration: "none"}}>ViaTrade.tech</a> blog.</h4>
+      <h4 className="text-center mt-5 p-5">Want to know more about our technology stack? Check out the <a href="https://viatrade-dashboard.vercel.app/signup" style={{textDecoration: "none"}}>ViaTrade.tech</a> blog.</h4>
       <Universe />
     </>
   );

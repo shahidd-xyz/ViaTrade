@@ -22,7 +22,7 @@ function Footer() {
           <div className="col" style={{ textDecoration: "none" }}>
             <p className="mb-5 fw-medium fs-5">Account</p>
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -31,7 +31,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -40,7 +40,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -49,7 +49,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -67,7 +67,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -76,7 +76,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -85,7 +85,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -97,7 +97,7 @@ function Footer() {
           <div className="col" style={{ textDecoration: "none" }}>
             <p className="mb-5 fw-medium fs-5">Support</p>
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -106,7 +106,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -114,7 +114,7 @@ function Footer() {
             </a>
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -123,7 +123,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -132,7 +132,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -141,7 +141,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -150,7 +150,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -159,7 +159,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -171,7 +171,7 @@ function Footer() {
           <div className="col" style={{ textDecoration: "none" }}>
             <p className="mb-5 fw-medium fs-5">Company</p>
             <a
-              href=""
+              href="/about"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -180,7 +180,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="/about"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -189,7 +189,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -198,7 +198,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="/about"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -216,7 +216,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://zerodha.com"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -225,7 +225,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -245,7 +245,7 @@ function Footer() {
           <div className="col">
             <p className="mb-5 fw-medium fs-5">Quick Links</p>
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -254,7 +254,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="/pricing"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -263,7 +263,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="/pricing"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -272,7 +272,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -281,7 +281,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -290,7 +290,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="/products"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -298,7 +298,7 @@ function Footer() {
             </a>
             <br />
             <a
-              href=""
+              href="/products"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >
@@ -307,7 +307,7 @@ function Footer() {
             <br />
             <br />
             <a
-              href=""
+              href="https://viatrade-dashboard.vercel.app/signup"
               style={{ textDecoration: "none" }}
               className="text-muted"
             >

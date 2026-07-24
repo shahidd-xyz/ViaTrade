@@ -10,7 +10,7 @@ function Hero() {
       <div className="row text-center">
         <img
           src="media/images/homeHero.png"
-          alt="Home Hero Image"
+          alt="Hero"
           className="mb-3 img-fluid"
           style={{ width: "70%", margin: "0 auto" }}
         />
