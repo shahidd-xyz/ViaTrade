@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
   const handleClick = () => {
-    window.location.href = "https://viatrade.vercel.app/signup";
+    window.location.href = "https://viatrade-dashboard.vercel.app/signup";
   };
 
   return (

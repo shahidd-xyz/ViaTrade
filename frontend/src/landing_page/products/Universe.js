@@ -2,7 +2,7 @@ import React from "react";
 
 function Universe() {
   const handleClick = () => {
-    window.location.href = "http://localhost:3000/signup";;
+    window.location.href = "https://viatrade-dashboard.vercel.app/signup";;
   }
 
   return (

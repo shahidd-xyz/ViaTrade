@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   const handleClick = () =>{
-   window.location.href = "https://via-trade.vercel.app/signup"; 
+   window.location.href = "https://viatrade-dashboard.vercel.app/signup"; 
   }
 
   return (
