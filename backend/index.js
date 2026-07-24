@@ -39,7 +39,7 @@ mongoose
 
 app.use(
   cors({
-    origin: "https://viatrade-dashboard.vercel.app",
+    origin: ["https://viatrade-dashboard.vercel.app", "http://localhost:3000"],
     credentials: true,
   }),
 );
@@ -59,19 +59,22 @@ store.on("error", () => {
   console.log("Error in Mongo Session Store");
 });
 
+
+
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(
   session({
     store,
     secret: process.env.TOKEN_KEY || "MySecretKey",
     resave: false,
     saveUninitialized: false,
-    proxy: true,
+    proxy: isProduction,
     cookie: {
-      expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
     },
   }),
 );
@@ -108,18 +111,6 @@ app.post("/register", Signup);
 app.post("/login", passport.authenticate("local"), Login);
 
 app.post("/logout", Logout);
-
-app.get("/debug-session", (req, res) => {
-  console.log("Session:", req.session);
-  console.log("User:", req.user);
-  console.log("Authenticated:", req.isAuthenticated());
-
-  res.json({
-    session: req.session,
-    user: req.user,
-    authenticated: req.isAuthenticated(),
-  });
-});
 
 app.get("/isUser", ensureAuth, (req, res) => {
   res.json({

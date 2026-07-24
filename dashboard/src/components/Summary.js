@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Summary = () => {
   const navigate = useNavigate();
+
+  const [holdings, setHoldings] = useState([]);
 
   useEffect(() => {
     async function isAuth() {
@@ -11,15 +13,40 @@ const Summary = () => {
         await axios("https://viatrade.onrender.com/isUser", {
           withCredentials: true,
         });
-
-        navigate("/");
       } catch (err) {
         alert("You're not logged in");
         navigate("/login");
       }
     }
     isAuth();
+
+    async function getHoldingsAtDashboard() {
+      const response = await axios.get(
+        "https://viatrade.onrender.com/allHoldings",
+        {
+          withCredentials: true,
+        },
+      );
+
+      setHoldings(response.data);
+    }
+    getHoldingsAtDashboard();
   }, [navigate]);
+
+  const totalHoldingsValue = holdings.reduce(
+    (total, holding) => total + holding.qty * holding.price,
+    0,
+  );
+
+  const totalInvestment = holdings.reduce(
+    (total, holding) => total + holding.qty * holding.avg,
+    0,
+  );
+
+  const profitLoss = totalHoldingsValue - totalInvestment;
+
+  const profitLossPercent =
+    totalInvestment > 0 ? ((profitLoss / totalInvestment) * 100).toFixed(2) : 0;
 
   return (
     <>
@@ -54,13 +81,14 @@ const Summary = () => {
 
       <div className="section">
         <span>
-          <p>Holdings (13)</p>
+          <p>Holdings ({holdings.length})</p>
         </span>
 
         <div className="data">
           <div className="first">
-            <h3 className="profit">
-              1.55k <small>+5.20%</small>{" "}
+            <h3 className={profitLoss >= 0 ? "profit" : "loss"}>
+              ₹{profitLoss.toFixed(2)}
+              <small>{profitLossPercent}%</small>{" "}
             </h3>
             <p>P&L</p>
           </div>
@@ -68,10 +96,10 @@ const Summary = () => {
 
           <div className="second">
             <p>
-              Current Value <span>31.43k</span>{" "}
+              Current Value <span>{totalHoldingsValue.toFixed(2)}</span>{" "}
             </p>
             <p>
-              Investment <span>29.88k</span>{" "}
+              Investment <span>{totalInvestment.toFixed(2)}</span>{" "}
             </p>
           </div>
         </div>
