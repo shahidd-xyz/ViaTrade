@@ -22,6 +22,12 @@ module.exports.Signup = async (req, res) => {
 };
 
 module.exports.Login = (req, res) => {
+  console.log("LOGIN");
+  console.log("Session ID:", req.sessionID);
+  console.log("Session:", req.session);
+  console.log("User:", req.user);
+  console.log("Authenticated:", req.isAuthenticated());
+
   res.json({
     success: true,
     user: req.user,
