@@ -1385,10 +1385,23 @@ hr {
 }
 
 @keyframes login-shake {
-  10%, 90% { transform: translateX(-1px); }
-  20%, 80% { transform: translateX(2px); }
-  30%, 50%, 70% { transform: translateX(-4px); }
-  40%, 60% { transform: translateX(4px); }
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
 }
 
 /* Small phones: tighten the error popup */
@@ -1872,7 +1885,8 @@ hr {
 }
 
 @media (max-width: 768px) {
-  .dashboard-container:has(.content > .title + .order-table + .row) > .watchlist-container {
+  .dashboard-container:has(.content > .title + .order-table + .row)
+    > .watchlist-container {
     display: none;
   }
 
@@ -1943,35 +1957,51 @@ hr {
     text-align: left;
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(1)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(1)::before {
     content: "Instrument";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(2)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(2)::before {
     content: "Qty.";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(3)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(3)::before {
     content: "Avg. cost";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(4)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(4)::before {
     content: "LTP";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(5)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(5)::before {
     content: "Curr. val";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(6)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(6)::before {
     content: "P&L";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(7)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(7)::before {
     content: "Net chg.";
   }
 
-  .content:has(> .title + .order-table + .row) > .order-table td:nth-child(8)::before {
+  .content:has(> .title + .order-table + .row)
+    > .order-table
+    td:nth-child(8)::before {
     content: "Day chg.";
   }
 
@@ -2051,7 +2081,9 @@ hr {
     -webkit-overflow-scrolling: touch;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table table {
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    table {
     min-width: 520px;
   }
 
@@ -2061,8 +2093,10 @@ hr {
 }
 
 @media (max-width: 768px) {
-  .dashboard-container:has(.content > .title.fs-3 + .order-table) > .watchlist-container,
-  .dashboard-container:has(.content > .title.fs-03 + .order-table) > .watchlist-container {
+  .dashboard-container:has(.content > .title.fs-3 + .order-table)
+    > .watchlist-container,
+  .dashboard-container:has(.content > .title.fs-03 + .order-table)
+    > .watchlist-container {
     display: none;
   }
 
@@ -2084,10 +2118,18 @@ hr {
     overflow: visible;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table table,
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table tbody,
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table tr,
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    table,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    tbody,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    tr,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td,
   .content:has(> .title.fs-03 + .order-table) > .order-table table,
   .content:has(> .title.fs-03 + .order-table) > .order-table tbody,
   .content:has(> .title.fs-03 + .order-table) > .order-table tr,
@@ -2097,19 +2139,25 @@ hr {
     box-sizing: border-box;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table table,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    table,
   .content:has(> .title.fs-03 + .order-table) > .order-table table {
     min-width: 0;
     border-collapse: separate;
     border-spacing: 0;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table tr:first-child,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    tr:first-child,
   .content:has(> .title.fs-03 + .order-table) > .order-table tr:first-child {
     display: none;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table tr,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    tr,
   .content:has(> .title.fs-03 + .order-table) > .order-table tr {
     margin-bottom: 1rem;
     padding: 0.75rem;
@@ -2119,7 +2167,9 @@ hr {
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td,
   .content:has(> .title.fs-03 + .order-table) > .order-table td {
     display: flex;
     align-items: center;
@@ -2132,13 +2182,17 @@ hr {
     font-size: 0.9rem;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td:last-child,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td:last-child,
   .content:has(> .title.fs-03 + .order-table) > .order-table td:last-child {
     border-bottom: 0;
     font-size: 0.9rem;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td::before,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td::before,
   .content:has(> .title.fs-03 + .order-table) > .order-table td::before {
     color: #64748b;
     font-size: 0.78rem;
@@ -2146,47 +2200,69 @@ hr {
     text-align: left;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td:nth-child(1)::before {
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td:nth-child(1)::before {
     content: "Instrument";
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td:nth-child(2)::before {
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td:nth-child(2)::before {
     content: "Qty.";
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td:nth-child(3)::before {
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td:nth-child(3)::before {
     content: "Price";
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td:nth-child(4)::before {
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td:nth-child(4)::before {
     content: "Mode";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(1)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(1)::before {
     content: "Product";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(2)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(2)::before {
     content: "Instrument";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(3)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(3)::before {
     content: "Qty.";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(4)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(4)::before {
     content: "Avg.";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(5)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(5)::before {
     content: "LTP";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(6)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(6)::before {
     content: "P&L";
   }
 
-  .content:has(> .title.fs-03 + .order-table) > .order-table td:nth-child(7)::before {
+  .content:has(> .title.fs-03 + .order-table)
+    > .order-table
+    td:nth-child(7)::before {
     content: "Chg.";
   }
 }
@@ -2197,12 +2273,16 @@ hr {
     padding: 0.8rem;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table tr,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    tr,
   .content:has(> .title.fs-03 + .order-table) > .order-table tr {
     border-radius: 12px;
   }
 
-  .content:has(> .title.fs-3 + .order-table):not(:has(> .row)) > .order-table td,
+  .content:has(> .title.fs-3 + .order-table):not(:has(> .row))
+    > .order-table
+    td,
   .content:has(> .title.fs-03 + .order-table) > .order-table td {
     font-size: 0.85rem;
   }
@@ -2549,7 +2629,8 @@ hr {
     margin-left: 0;
   }
 
-  .dashboard-container:has(.content > .mobile-watchlist-page) > .watchlist-container {
+  .dashboard-container:has(.content > .mobile-watchlist-page)
+    > .watchlist-container {
     display: none;
   }
 
