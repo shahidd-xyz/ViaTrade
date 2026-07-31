@@ -17,7 +17,6 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const { UserModel } = require("./model/UserModel");
-const { StockModel } = require("./model/StockModel");
 
 const { Signup, Login, Logout } = require("./Controllers/AuthController");
 const { ensureAuth } = require("./Middlewares/AuthMiddleware");
