@@ -19,9 +19,9 @@ code {
 
 .dashboard-container {
   width: 100%;
-  height: 90vh;
+  height: calc(100vh - 70px);
   display: flex;
-  align-items: center;
+  align-items: stretch;
   box-sizing: border-box;
 }
 
@@ -867,7 +867,7 @@ hr {
 
 .topbar-container {
   width: 100%;
-  height: 10vh;
+  height: 70px;
   display: flex;
   align-items: center;
   box-shadow: 0px 0px 4px 2px rgb(236, 235, 235);
@@ -2739,4 +2739,55 @@ hr {
     border-radius: 14px;
     background-color: #fff;
   }
+}
+
+/* New */
+/* Search page responsive */
+
+@media (max-width: 991px) {
+  .dashboard-container:has(.content > .container-fluid) > .watchlist-container {
+    display: none;
+  }
+
+  .content:has(> .container-fluid) {
+    flex-basis: 100%;
+    width: 100%;
+    padding: 16px;
+  }
+}
+
+.stock-details-card {
+  border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+  .stock-details-card .card-body {
+    padding: 18px;
+  }
+
+  .stock-details-card h2 {
+    font-size: 2rem;
+  }
+
+  .stock-details-card .btn {
+    width: 100%;
+  }
+}
+
+.not-found-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.not-found-page {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  overflow: hidden;
 }

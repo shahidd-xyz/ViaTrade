@@ -3,6 +3,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import API_URL from "../config/api";
 
 function Signup() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Signup() {
     validate,
     onSubmit: async (values) => {
       try {
-        const res = await axios.post("https://viatrade.onrender.com/signup", values, {
+        const res = await axios.post(`${API_URL}/signup`, values, {
           withCredentials: true,
         });
 

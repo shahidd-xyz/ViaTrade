@@ -1,147 +1,147 @@
+
 const { OrdersModel } = require("../model/OrdersModel");
 const { HoldingsModel } = require("../model/HoldingsModel");
-const { StockModel } = require("../model/StockSchema");
 
-module.exports.getCurrPrice = async (req, res) => {
-  try {
-    const name = req.query.name;
-    if (name) {
-      let stock = await StockModel.findOne({ name });
-      if (!stock) {
-        stock = await StockModel.create({
-          name,
-          qty: 0,
-          avg: 0,
-          price: 0,
-          net: "0.00%",
-          day: "0.00%",
-        });
-      }
-      return res.json(stock);
-    }
-
-    const all = await StockModel.find({});
-    return res.json(all);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Server error" });
-  }
-};
-
+// ==========================
+// BUY ORDER
+// ==========================
 module.exports.newOrder = async (req, res) => {
   try {
-    const { name, qty } = req.body;
-    if (!name || !qty)
-      return res.status(400).json({ message: "Missing name or qty" });
+    const { instrumentKey, name, qty, price, mode = "BUY" } = req.body;
 
-    // Get current price from StockModel or create a fallback entry from the request data
-    let stock = await StockModel.findOne({ name });
-    if (!stock) {
-      stock = await StockModel.create({
-        name,
-        qty: 0,
-        avg: Number(req.body.price || 0),
-        price: Number(req.body.price || 0),
-        net: "0.00%",
-        day: "0.00%",
+    if (!instrumentKey || !name || !qty || !price) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields",
       });
     }
-    const currentPrice = Number(stock.price || 0);
-    const totalPrice = currentPrice * Number(qty);
 
-    // Save order using currentPrice
-    const order = new OrdersModel({
+    const quantity = Number(qty);
+    const executionPrice = Number(price);
+
+    if (quantity <= 0 || executionPrice <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid quantity or price",
+      });
+    }
+
+    // Save Order
+    const order = await OrdersModel.create({
       user: req.user._id,
+      instrumentKey,
       name,
-      qty: Number(qty),
-      price: currentPrice,
-      mode: req.body.mode || "BUY",
+      qty: quantity,
+      price: executionPrice,
+      mode,
     });
-    await order.save();
 
-    // Update holdings: weighted average and latest price
-    const holding = await HoldingsModel.findOne({ user: req.user._id, name });
-    if (holding) {
-      const oldQty = Number(holding.qty || 0);
-      const oldAvg = Number(holding.avg || holding.price || 0);
-      const newQty = Number(qty);
-      const totalQty = oldQty + newQty;
-      const newAvg =
-        totalQty === 0
-          ? 0
-          : (oldAvg * oldQty + currentPrice * newQty) / totalQty;
+    // Find Existing Holding
+    let holding = await HoldingsModel.findOne({
+      user: req.user._id,
+      instrumentKey,
+    });
+
+    if (!holding) {
+      await HoldingsModel.create({
+        user: req.user._id,
+        instrumentKey,
+        name,
+        qty: quantity,
+        avg: executionPrice,
+      });
+    } else {
+      const totalQty = holding.qty + quantity;
+
+      holding.avg =
+        (holding.avg * holding.qty + executionPrice * quantity) / totalQty;
 
       holding.qty = totalQty;
-      holding.avg = newAvg;
-      holding.price = currentPrice;
+
       await holding.save();
-    } else {
-      const newHolding = new HoldingsModel({
-        user: req.user._id,
-        name,
-        qty: Number(qty),
-        avg: currentPrice,
-        price: currentPrice,
-        net: "0.00%",
-        day: "0.00%",
-      });
-      await newHolding.save();
     }
 
-    return res.json({ message: "Order placed", order, totalPrice });
+    return res.status(201).json({
+      success: true,
+      message: "Order placed successfully",
+      order,
+    });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error" });
+
+    return res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
   }
 };
 
-
+// ==========================
+// SELL ORDER
+// ==========================
 module.exports.deleteOrder = async (req, res) => {
   try {
-    const name = req.body?.name || req.params?.name;
-    const qty = Number(req.body?.qty ?? req.params?.qty);
+    const { instrumentKey, name, qty, price } = req.body;
 
-    if (!name || !qty) {
-      return res.status(400).json({ message: "Missing name or qty" });
+    if (!instrumentKey || !name || !qty || !price) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields",
+      });
     }
 
-    const stock = await StockModel.findOne({ name });
-    if (!stock) return res.status(404).json({ message: "Stock not found" });
+    const quantity = Number(qty);
+    const executionPrice = Number(price);
 
-    const currentPrice = Number(stock.price || 0);
-    const totalPrice = currentPrice * qty;
+    const holding = await HoldingsModel.findOne({
+      user: req.user._id,
+      instrumentKey,
+    });
 
-    const holding = await HoldingsModel.findOne({ user: req.user._id, name });
     if (!holding) {
-      return res.status(400).json({ message: "No holding found" });
+      return res.status(404).json({
+        success: false,
+        message: "Holding not found",
+      });
     }
 
-    const currentQty = Number(holding.qty || 0);
-    if (currentQty < qty) {
-      return res.status(400).json({ message: "Insufficient quantity" });
+    if (holding.qty < quantity) {
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient quantity",
+      });
     }
 
-    const newQty = currentQty - qty;
-    if (newQty === 0) {
-      await HoldingsModel.deleteOne({ _id: holding._id });
+    holding.qty -= quantity;
+
+    if (holding.qty === 0) {
+      await HoldingsModel.deleteOne({
+        _id: holding._id,
+      });
     } else {
-      holding.qty = newQty;
-      holding.price = currentPrice;
       await holding.save();
     }
 
-    const order = new OrdersModel({
+    const order = await OrdersModel.create({
       user: req.user._id,
+      instrumentKey,
       name,
-      qty: Number(qty),
-      price: currentPrice,
+      qty: quantity,
+      price: executionPrice,
       mode: "SELL",
     });
-    await order.save();
 
-    return res.json({ message: "Sell order placed", order, totalPrice });
+    return res.status(200).json({
+      success: true,
+      message: "Sell order placed successfully",
+      order,
+    });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server error" });
+
+    return res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
   }
 };

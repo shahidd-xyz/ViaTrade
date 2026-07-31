@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../config/api";
 
 function Menu() {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -15,7 +16,7 @@ function Menu() {
     let isMounted = true;
 
     axios
-      .get("https://viatrade.onrender.com/isUser", { withCredentials: true })
+      .get(`${API_URL}/isUser`, { withCredentials: true })
       .then((res) => {
         if (isMounted && res.data?.user) {
           setUser(res.data.user);
@@ -62,7 +63,7 @@ function Menu() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "https://viatrade.onrender.com/logout",
+        `${API_URL}/logout`,
         {},
         { withCredentials: true }
       );
@@ -159,11 +160,11 @@ function Menu() {
           <li>
             <Link
               style={{ textDecoration: "none" }}
-              to="/apps"
+              to="/search"
               onClick={() => handleMenuClick(5)}
             >
               <p className={selectedMenu === 5 ? activeMenuClass : menuClass}>
-                Apps
+                Search
               </p>
             </Link>
           </li>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import API_URL from "../config/api";
 
 
 function Login() {
@@ -49,7 +50,7 @@ function Login() {
       setLoginError("");
       try {
         const res = await axios.post(
-          "https://viatrade.onrender.com/login",
+          `${API_URL}/login`,
           values,
           {
             withCredentials: true,

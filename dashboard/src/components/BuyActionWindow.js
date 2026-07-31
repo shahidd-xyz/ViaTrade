@@ -2,64 +2,52 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
+import API_URL from "../config/api";
 
 import GeneralContext from "./GeneralContext";
 
 import "./BuyActionWindow.css";
 
-const BuyActionWindow = ({ uid, mode = "BUY" }) => {
+const BuyActionWindow = ({ stock, mode = "BUY" }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
 
   const isSellMode = mode === "SELL";
+
   const [stockQuantity, setStockQuantity] = useState(1);
-  const [stockPrice, setStockPrice] = useState(0.0);
   const [maxSellQty, setMaxSellQty] = useState(0);
+
+  const stockPrice = Number(stock?.lastPrice || 0);
+
   const numericQuantity = Number(stockQuantity) || 0;
   const orderValue = stockPrice * numericQuantity;
 
   useEffect(() => {
     setStockQuantity(1);
-  }, [uid, mode]);
+  }, [stock, mode]);
 
   useEffect(() => {
-    let mounted = true;
-
-    const fetchPrice = async () => {
-      try {
-        const res = await axios.get("https://viatrade.onrender.com/getCurrPrice", {
-          params: { name: uid },
-          withCredentials: true,
-        });
-        const match = res.data;
-        if (match && mounted) setStockPrice(Number(match.price || 0));
-      } catch (err) {
-        console.warn("Could not fetch holdings", err);
-      }
-    };
-
     const fetchHoldings = async () => {
+      if (!isSellMode) return;
+
       try {
-        const res = await axios.get("https://viatrade.onrender.com/allHoldings", {
+        const res = await axios.get(`${API_URL}/allHoldings`, {
           withCredentials: true,
         });
+
         const holdings = Array.isArray(res.data) ? res.data : [];
-        const holding = holdings.find((item) => item.name === uid);
-        if (mounted) {
-          setMaxSellQty(Number(holding?.qty || 0));
-        }
+
+        const holding = holdings.find(
+          (item) => item.instrumentKey === stock.instrumentKey,
+        );
+
+        setMaxSellQty(Number(holding?.qty || 0));
       } catch (err) {
-        console.warn("Could not fetch holdings", err);
+        console.error(err);
       }
     };
 
-    fetchPrice();
-    if (isSellMode) {
-      fetchHoldings();
-    } else {
-      setMaxSellQty(0);
-    }
-    return () => (mounted = false);
-  }, [uid, isSellMode]);
+    fetchHoldings();
+  }, [stock, isSellMode]);
 
   const handleQuantityChange = (value) => {
     if (value === "") {
@@ -67,12 +55,13 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
       return;
     }
 
-    const parsedValue = Math.max(0, Number(value));
-    setStockQuantity(Number.isNaN(parsedValue) ? "" : parsedValue);
+    const parsed = Math.max(0, Number(value));
+    setStockQuantity(Number.isNaN(parsed) ? "" : parsed);
   };
 
   const isQuantityValid =
     numericQuantity > 0 && (!isSellMode || numericQuantity <= maxSellQty);
+
   const quantityWarning =
     isSellMode && numericQuantity > maxSellQty
       ? `You can sell up to ${maxSellQty} unit${maxSellQty === 1 ? "" : "s"}.`
@@ -80,101 +69,94 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
 
   const handleBuyClick = async () => {
     try {
-      const response = await axios.post(
-        "https://viatrade.onrender.com/newOrder",
+      await axios.post(
+        `${API_URL}/newOrder`,
         {
-          name: uid,
+          instrumentKey: stock.instrumentKey,
+          name: stock.symbol,
           qty: numericQuantity,
           price: stockPrice,
           mode: "BUY",
         },
-        { withCredentials: true },
+        {
+          withCredentials: true,
+        },
       );
-
-      if (response?.data?.message) {
-        await axios.get("https://viatrade.onrender.com/allHoldings", {
-          withCredentials: true,
-        });
-        await axios.get("https://viatrade.onrender.com/allOrders", {
-          withCredentials: true,
-        });
-      }
 
       closeBuyWindow();
     } catch (err) {
-      console.error("Buy order failed", err);
-      alert(err?.response?.data?.message || "Buy order failed. Please log in and try again.");
+      console.error(err);
+
+      alert(err?.response?.data?.message || "Unable to place buy order.");
     }
   };
 
   const handleSellClick = async () => {
     try {
       await axios.post(
-        "https://viatrade.onrender.com/deleteOrder",
+        `${API_URL}/deleteOrder`,
         {
-          name: uid,
+          instrumentKey: stock.instrumentKey,
+          name: stock.symbol,
           qty: numericQuantity,
+          price: stockPrice,
+          mode: "SELL",
         },
         {
           withCredentials: true,
         },
       );
 
-      await axios.get("https://viatrade.onrender.com/allHoldings", {
-        withCredentials: true,
-      });
-      await axios.get("https://viatrade.onrender.com/allOrders", {
-        withCredentials: true,
-      });
-
       closeBuyWindow();
     } catch (err) {
-      console.log(err);
-    }
-  };
+      console.error(err);
 
-  const handleCancelClick = () => {
-    closeBuyWindow();
+      alert(err?.response?.data?.message || "Unable to place sell order.");
+    }
   };
 
   return (
     <>
-      <div className="buy-window-backdrop" onClick={handleCancelClick} />
-      <div className="container" id="buy-window" draggable="true">
+      <div className="buy-window-backdrop" onClick={closeBuyWindow} />
+
+      <div className="container" id="buy-window">
         <div className={`header ${isSellMode ? "sell-header" : ""}`}>
           <h3>
-            {isSellMode ? "Sell" : "Buy"} {uid}
+            {isSellMode ? "Sell" : "Buy"} {stock.symbol}
           </h3>
-          <p className="market-options">NSE · Market order</p>
+
+          <p className="market-options">NSE · Market Order</p>
         </div>
 
         <div className="regular-order">
           <div className="inputs">
             <fieldset>
               <legend>Qty.</legend>
+
               <input
                 type="number"
-                name="qty"
-                id="qty"
                 min={1}
                 max={isSellMode ? maxSellQty : undefined}
-                onChange={(e) => handleQuantityChange(e.target.value)}
                 value={stockQuantity}
+                onChange={(e) => handleQuantityChange(e.target.value)}
               />
             </fieldset>
+
+            <p>Current Price : ₹{stockPrice.toFixed(2)}</p>
+
             <p>
-              {isSellMode ? "Sell Value" : "Total Price"}: ₹{orderValue.toFixed(2)}
+              {isSellMode ? "Sell Value" : "Total Price"}: ₹
+              {orderValue.toFixed(2)}
             </p>
-            {isSellMode && <p>Max Qty Available: {maxSellQty}</p>}
-            {isSellMode && quantityWarning && (
+
+            {isSellMode && <p>Max Qty Available : {maxSellQty}</p>}
+
+            {quantityWarning && (
               <p
                 style={{
                   color: "#d32f2f",
                   marginTop: "6px",
-                  marginBottom: "0",
                   fontSize: "0.9rem",
-                  display: "block",
-                  width: "100%",
                 }}
               >
                 {quantityWarning}
@@ -185,12 +167,13 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
 
         <div className="buttons">
           <span>
-            {isSellMode ? "Estimated Sell Value" : "Margin Required"}: ₹{orderValue.toFixed(2)}
+            {isSellMode ? "Estimated Sell Value" : "Margin Required"}: ₹
+            {orderValue.toFixed(2)}
           </span>
+
           <div>
             {isSellMode ? (
               <button
-                type="button"
                 className="btn btn-blue"
                 onClick={handleSellClick}
                 disabled={!isQuantityValid}
@@ -199,14 +182,15 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
               </button>
             ) : (
               <button
-                type="button"
                 className="btn btn-blue"
                 onClick={handleBuyClick}
+                disabled={!isQuantityValid}
               >
                 Buy
               </button>
             )}
-            <Link to="" className="btn btn-grey" onClick={handleCancelClick}>
+
+            <Link to="" className="btn btn-grey" onClick={closeBuyWindow}>
               Cancel
             </Link>
           </div>

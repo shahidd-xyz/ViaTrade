@@ -13,7 +13,7 @@ const authRoutes = require("./routes/stock");
 
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: ["https://viatrade-dashboard.vercel.app", "http://localhost:3000"],
     credentials: true,  
 }));
 

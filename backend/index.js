@@ -17,11 +17,12 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const { UserModel } = require("./model/UserModel");
-const { StockModel } = require("./model/StockSchema");
+const { StockModel } = require("./model/StockModel");
 
 const { Signup, Login, Logout } = require("./Controllers/AuthController");
 const { ensureAuth } = require("./Middlewares/AuthMiddleware");
-const { newOrder, getCurrPrice, deleteOrder } = require("./Controllers/Order");
+const { newOrder, deleteOrder } = require("./Controllers/Order");
+const { addToWatchlist, getWatchlist } = require("./Controllers/Watchlist");
 
 const PORT = process.env.PORT || 8080;
 const uri = process.env.MONGO_URL;
@@ -59,8 +60,6 @@ store.on("error", () => {
   console.log("Error in Mongo Session Store");
 });
 
-
-
 const isProduction = process.env.NODE_ENV === "production";
 
 app.use(
@@ -82,9 +81,84 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// app.get("/allHoldings", ensureAuth, async (req, res) => {
+//   const allHoldings = await HoldingsModel.find({ user: req.user._id });
+//   res.json(allHoldings);
+// });
+
 app.get("/allHoldings", ensureAuth, async (req, res) => {
-  const allHoldings = await HoldingsModel.find({ user: req.user._id });
-  res.json(allHoldings);
+  try {
+    const holdings = await HoldingsModel.find({
+      user: req.user._id,
+    });
+
+    const result = await Promise.all(
+      holdings.map(async (holding) => {
+        try {
+          const { data } = await axios.get(
+            "http://localhost:8090/auth/upstox/quote",
+            {
+              params: {
+                instrument_key: holding.instrumentKey,
+              },
+            },
+          );
+
+          const quote = data;
+
+          const price = Number(quote.lastPrice);
+
+          const currentValue = price * holding.qty;
+          const investment = holding.avg * holding.qty;
+
+          const pnl = currentValue - investment;
+
+          const pnlPercent = investment === 0 ? 0 : (pnl / investment) * 100;
+
+          return {
+            instrumentKey: holding.instrumentKey,
+            name: holding.name,
+            qty: holding.qty,
+            avg: holding.avg,
+
+            price,
+
+            net: `${pnlPercent.toFixed(2)}%`,
+
+            day: `${Number(quote.change).toFixed(2)}%`,
+
+            isLoss: pnl < 0,
+          };
+        } catch (err) {
+          console.log(
+            `Quote Error (${holding.name})`,
+            err.response?.data || err.message,
+          );
+
+          return {
+            instrumentKey: holding.instrumentKey,
+            name: holding.name,
+            qty: holding.qty,
+            avg: holding.avg,
+
+            price: 0,
+            net: "0.00%",
+            day: "0.00%",
+            isLoss: false,
+          };
+        }
+      }),
+    );
+
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to fetch holdings",
+    });
+  }
 });
 
 app.get("/allPositions", async (req, res) => {
@@ -94,14 +168,26 @@ app.get("/allPositions", async (req, res) => {
 });
 
 app.get("/allOrders", ensureAuth, async (req, res) => {
-  const allOrders = await OrdersModel.find({ user: req.user._id });
-  res.json(allOrders);
+  try {
+    const allOrders = await OrdersModel.find({ user: req.user._id });
+    res.json(allOrders);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch orders",
+    });
+  }
 });
 
-app.get("/getCurrPrice", getCurrPrice);
 app.post("/newOrder", ensureAuth, newOrder);
 app.post("/deleteOrder", ensureAuth, deleteOrder);
 app.delete("/deleteOrder", ensureAuth, deleteOrder);
+
+//Watchlist Routes
+app.post("/watchlist", ensureAuth, addToWatchlist);
+
+app.get("/watchlist", ensureAuth, getWatchlist);
 
 //Authentication & Authorization
 

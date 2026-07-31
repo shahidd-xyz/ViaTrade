@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../config/api";
 
 const Summary = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Summary = () => {
   useEffect(() => {
     async function isAuth() {
       try {
-        await axios("https://viatrade.onrender.com/isUser", {
+        await axios(`${API_URL}/isUser`, {
           withCredentials: true,
         });
       } catch (err) {
@@ -22,7 +23,7 @@ const Summary = () => {
 
     async function getHoldingsAtDashboard() {
       const response = await axios.get(
-        "https://viatrade.onrender.com/allHoldings",
+        `${API_URL}/allHoldings`,
         {
           withCredentials: true,
         },
@@ -62,7 +63,7 @@ const Summary = () => {
 
         <div className="data">
           <div className="first">
-            <h3>34.2kk</h3>
+            <h3>24k</h3>
             <p>Margin available</p>
           </div>
           <hr />

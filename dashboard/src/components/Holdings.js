@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "../config/api";
 
 import { VerticalGraph } from "./VerticalGraph";
 import { DoughnutChart } from "./DoughnutChart";
@@ -10,12 +11,13 @@ function Holdings() {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("https://viatrade.onrender.com/allHoldings", {withCredentials: true}).then((res) => {
-      console.log(res.data);
-      setAllHoldings(res.data);
-    });
+    axios
+      .get(`${API_URL}/allHoldings`, { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        setAllHoldings(res.data);
+      });
   }, []);
-
 
   //Chartjs - VerticalGraph
 
@@ -32,7 +34,6 @@ function Holdings() {
     ],
   };
 
-
   //Chartjs - DoughnutChart
 
   const doughnutChartData = {
@@ -42,40 +43,39 @@ function Holdings() {
         label: "Stock Quantity",
         data: allHoldings.map((stock) => stock.qty),
         backgroundColor: [
-          'rgba(255, 99, 132, 0.5)',
-        'rgba(54, 162, 235, 0.5)',
-        'rgba(255, 206, 86, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(153, 102, 255, 0.5)',
-        'rgba(255, 159, 64, 0.5)',
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)",
+          "rgba(153, 102, 255, 0.5)",
+          "rgba(255, 159, 64, 0.5)",
         ],
         borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      }
-    ]
-  }
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+      },
+    ],
+  };
 
   //Calculating Total Investment and Current Value
 
   const totalInvestment = allHoldings.reduce(
     (sum, stock) => sum + stock.avg * stock.qty,
-    0
+    0,
   );
 
   const totalCurrentValue = allHoldings.reduce(
     (sum, stock) => sum + stock.price * stock.qty,
-    0
+    0,
   );
 
   const totalProfitLoss = totalCurrentValue - totalInvestment;
   const totalProfitLossPercent = (totalProfitLoss / totalInvestment) * 100;
-
 
   return (
     <>
@@ -86,7 +86,7 @@ function Holdings() {
           <tr>
             <th>Instrument</th>
             <th>Qty.</th>
-            <th>Avg. cost</th>
+            <th>Buy price</th>
             <th>LTP</th>
             <th>Curr. val</th>
             <th>P&L</th>
@@ -110,7 +110,7 @@ function Holdings() {
                 <td className={profitClass}>
                   {(currVal - stock.avg * stock.qty).toFixed(2)}
                 </td>
-                <td className={profitClass}>{stock.net}</td>
+                <td className={profitClass}>{stock.net}%</td>
                 <td className={dayClass}>{stock.day}</td>
               </tr>
             );
@@ -121,23 +121,31 @@ function Holdings() {
       <div className="row">
         <div className="col">
           <h5>
-            {totalInvestment.toFixed(2)}<span></span>{" "}
+            {totalInvestment.toFixed(2)}
+            <span></span>{" "}
           </h5>
           <p>Total investment</p>
         </div>
         <div className="col">
           <h5>
-            {totalCurrentValue.toFixed(2)}<span></span>{" "}
+            {totalCurrentValue.toFixed(2)}
+            <span></span>{" "}
           </h5>
           <p>Current value</p>
         </div>
         <div className="col">
-          <h5>{totalProfitLoss.toFixed(2)} ({Number.isFinite(totalProfitLossPercent) ? totalProfitLossPercent.toFixed(2) : 0}%)</h5>
+          <h5>
+            {totalProfitLoss.toFixed(2)} (
+            {Number.isFinite(totalProfitLossPercent)
+              ? totalProfitLossPercent.toFixed(2)
+              : 0}
+            %)
+          </h5>
           <p>P&L</p>
         </div>
       </div>
-      <VerticalGraph data={verticalGraphData}/>
-      <DoughnutChart data={doughnutChartData}/>
+      <VerticalGraph data={verticalGraphData} />
+      <DoughnutChart data={doughnutChartData} />
     </>
   );
 }

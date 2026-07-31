@@ -7,10 +7,17 @@ const OrdersSchema = new Schema({
     ref: "User",
     required: true,
   },
+
+  instrumentKey: {
+    type: String,
+    required: true,
+  },
+
   name: String,
   qty: Number,
   price: Number,
   mode: String,
+
   createdAt: {
     type: Date,
     default: Date.now,

@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import Tooltip from "@mui/material/Tooltip";
 import Grow from "@mui/material/Grow";
@@ -12,14 +11,22 @@ import {
 
 import GeneralContext from "./GeneralContext";
 
-import { watchlist } from "../data/data";
-
 const WatchList = () => {
+  const { watchlist, fetchWatchlist } = useContext(GeneralContext);
+
   const [activeStock, setActiveStock] = useState(null);
 
+  useEffect(() => {
+    fetchWatchlist();
+
+    const interval = setInterval(fetchWatchlist, 50000);
+
+    return () => clearInterval(interval);
+  }, [fetchWatchlist]);
+
   return (
-    <div className="watchlist-container">
-      <div className="search-container">
+    <div className="watchlist-container mt-3 rounded-top-4 rounded-start-0">
+      <div className="search-container mt-3">
         <form action="/market">
           <input
             type="text"
@@ -29,20 +36,19 @@ const WatchList = () => {
             className="search"
           />
         </form>
+
         <span className="counts">{watchlist.length} / 50</span>
       </div>
 
       <ul className="list">
-        {watchlist.map((stock, index) => {
-          return (
-            <WatchListItem
-              stock={stock}
-              key={index}
-              isActive={activeStock === stock.name}
-              setActiveStock={setActiveStock}
-            />
-          );
-        })}
+        {watchlist.map((stock) => (
+          <WatchListItem
+            key={stock.instrumentKey}
+            stock={stock}
+            isActive={activeStock === stock.instrumentKey}
+            setActiveStock={setActiveStock}
+          />
+        ))}
       </ul>
     </div>
   );
@@ -53,7 +59,7 @@ export default WatchList;
 function WatchListItem({ stock, isActive, setActiveStock }) {
   const handlePointerEnter = (e) => {
     if (e.pointerType === "mouse") {
-      setActiveStock(stock.name);
+      setActiveStock(stock.instrumentKey);
     }
   };
 
@@ -70,7 +76,7 @@ function WatchListItem({ stock, isActive, setActiveStock }) {
 
     if (hasDesktopHover) return;
 
-    setActiveStock(isActive ? null : stock.name);
+    setActiveStock(isActive ? null : stock.instrumentKey);
   };
 
   return (
@@ -81,42 +87,37 @@ function WatchListItem({ stock, isActive, setActiveStock }) {
     >
       <div className="item">
         <Tooltip
-          title={stock.name}
+          title={stock.symbol}
           placement="right"
           arrow
           TransitionComponent={Grow}
           enterDelay={300}
         >
-          <p className={stock.isDown ? "down" : "up"}>{stock.name}</p>
+          <p className={stock.isDown ? "down" : "up"}>{stock.symbol}</p>
         </Tooltip>
+
         <div className="itemInfo">
           <span className="percent">{stock.percent}</span>
+
           {stock.isDown ? (
             <KeyboardArrowDown className="down" />
           ) : (
             <KeyboardArrowUp className="up" />
           )}
+
           <span className={`price ${stock.isDown ? "down" : "up"}`}>
-            {stock.price}
+            ₹{Number(stock.lastPrice).toFixed(2)}
           </span>
         </div>
       </div>
 
-      {isActive && <WatchListActions uid={stock.name} />}
+      {isActive && <WatchListActions stock={stock} />}
     </li>
   );
 }
 
-function WatchListActions({ uid }) {
-  const generalContext = useContext(GeneralContext);
-
-  const handleBuyClick = () => {
-    generalContext.openBuyWindow(uid, "BUY");
-  };
-
-  const handleSellClick = () => {
-    generalContext.openBuyWindow(uid, "SELL");
-  };
+function WatchListActions({ stock }) {
+  const { openBuyWindow } = useContext(GeneralContext);
 
   return (
     <span className="actions actions-open" onClick={(e) => e.stopPropagation()}>
@@ -127,7 +128,9 @@ function WatchListActions({ uid }) {
           arrow
           TransitionComponent={Grow}
         >
-          <button className="buy" onClick={handleBuyClick}>Buy</button>
+          <button className="buy" onClick={() => openBuyWindow(stock, "BUY")}>
+            Buy
+          </button>
         </Tooltip>
 
         <Tooltip
@@ -136,7 +139,9 @@ function WatchListActions({ uid }) {
           arrow
           TransitionComponent={Grow}
         >
-          <button className="sell" onClick={handleSellClick}>Sell</button>
+          <button className="sell" onClick={() => openBuyWindow(stock, "SELL")}>
+            Sell
+          </button>
         </Tooltip>
 
         <Tooltip

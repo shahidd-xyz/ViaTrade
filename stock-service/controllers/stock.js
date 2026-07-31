@@ -2,7 +2,6 @@ const axios = require("axios");
 
 const upstoxService = require("../services/upstoxService");
 
-
 const login = (req, res) => {
   const authUrl =
     `https://api.upstox.com/v2/login/authorization/dialog` +
@@ -36,7 +35,6 @@ const callback = async (req, res) => {
       message: "Authentication successful",
       profile,
     });
-
   } catch (err) {
     console.error(err.response?.data || err.message);
 
@@ -62,7 +60,6 @@ const searchStock = async (req, res) => {
     const stocks = await upstoxService.searchStock(q);
 
     res.status(200).json(stocks);
-
   } catch (err) {
     console.error(err.response?.data || err.message);
 
@@ -73,10 +70,8 @@ const searchStock = async (req, res) => {
   }
 };
 
-
 const getQuote = async (req, res) => {
   try {
-
     const { instrument_key } = req.query;
 
     if (!instrument_key) {
@@ -89,10 +84,61 @@ const getQuote = async (req, res) => {
     const quote = await upstoxService.getQuote(instrument_key);
 
     res.status(200).json(quote);
-
   } catch (err) {
-
     console.error(err.response?.data || err);
+
+    res.status(500).json({
+      success: false,
+      message: err.response?.data || err.message,
+    });
+  }
+};
+
+const getIndices = async (req, res) => {
+  try {
+    const data = await upstoxService.getIndices();
+
+    res.json({
+      nifty: {
+        price: data["NSE_INDEX:Nifty 50"].last_price,
+        change: data["NSE_INDEX:Nifty 50"].net_change,
+      },
+      sensex: {
+        price: data["BSE_INDEX:SENSEX"].last_price,
+        change: data["BSE_INDEX:SENSEX"].net_change,
+      },
+    });
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+
+    res.status(500).json({
+      success: false,
+      message: err.response?.data || err.message,
+    });
+  }
+};
+
+const getHistoricalData = async (req, res) => {
+  try {
+    const { instrument_key, interval = "day", to, from } = req.query;
+
+    if (!instrument_key) {
+      return res.status(400).json({
+        success: false,
+        message: "Instrument key required",
+      });
+    }
+
+    const data = await upstoxService.getHistoricalData(
+      instrument_key,
+      interval,
+      to,
+      from,
+    );
+
+    res.json(data);
+  } catch (err) {
+    console.error(err.response?.data || err.message);
 
     res.status(500).json({
       success: false,
@@ -106,4 +152,6 @@ module.exports = {
   callback,
   searchStock,
   getQuote,
+  getIndices,
+  getHistoricalData,
 };
