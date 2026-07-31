@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import axios from "axios";
 import { createChart, ColorType, CrosshairMode } from "lightweight-charts";
+import UPSTOX_API_URL from "../config/upstoxApi";
 
 import "./StockCharts.css";
 
-const API = "http://localhost:8090/auth/upstox";
+const API = `${UPSTOX_API_URL}/auth/upstox`;
 
 const StockChart = ({ instrumentKey }) => {
   const chartContainerRef = useRef(null);

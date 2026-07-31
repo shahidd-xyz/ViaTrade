@@ -5,8 +5,6 @@ import API_URL from "../config/api";
 import { VerticalGraph } from "./VerticalGraph";
 import { DoughnutChart } from "./DoughnutChart";
 
-// import { holdings } from "../data/data";
-
 function Holdings() {
   const [allHoldings, setAllHoldings] = useState([]);
 

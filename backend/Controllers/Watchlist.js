@@ -51,7 +51,7 @@ module.exports.getWatchlist = async (req, res) => {
       stocks.map(async (stock) => {
         try {
           const { data: quote } = await axios.get(
-            "http://localhost:8090/auth/upstox/quote",
+            "https://viatrade-upstox.onrender.com/auth/upstox/quote",
             {
               params: {
                 instrument_key: stock.instrumentKey,

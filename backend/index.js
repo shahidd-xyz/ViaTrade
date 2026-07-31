@@ -81,10 +81,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get("/allHoldings", ensureAuth, async (req, res) => {
-//   const allHoldings = await HoldingsModel.find({ user: req.user._id });
-//   res.json(allHoldings);
-// });
+//Holdings
 
 app.get("/allHoldings", ensureAuth, async (req, res) => {
   try {
@@ -96,7 +93,7 @@ app.get("/allHoldings", ensureAuth, async (req, res) => {
       holdings.map(async (holding) => {
         try {
           const { data } = await axios.get(
-            "http://localhost:8090/auth/upstox/quote",
+            "https://viatrade-upstox.onrender.com/auth/upstox/quote",
             {
               params: {
                 instrument_key: holding.instrumentKey,

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://localhost:8090/auth/upstox",
+    baseURL: "https://viatrade-upstox.onrender.com/auth/upstox",
 });
 
 export const searchStocks = async (query) => {

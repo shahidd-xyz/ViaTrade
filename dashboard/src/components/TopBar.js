@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Menu from "./Menu";
+import UPSTOX_API_URL from "../config/upstoxApi";
 
 const TopBar = () => {
   const [indices, setIndices] = useState({
@@ -17,7 +18,7 @@ const TopBar = () => {
   const fetchIndices = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8090/auth/upstox/indices",
+        `${UPSTOX_API_URL}/auth/upstox/indices`,
       );
 
       setIndices(data);
