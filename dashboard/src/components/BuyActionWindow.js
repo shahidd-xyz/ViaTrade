@@ -7,6 +7,7 @@ import API_URL from "../config/api";
 import GeneralContext from "./GeneralContext";
 
 import "./BuyActionWindow.css";
+import { toast } from "react-toastify";
 
 const BuyActionWindow = ({ stock, mode = "BUY" }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
@@ -83,11 +84,12 @@ const BuyActionWindow = ({ stock, mode = "BUY" }) => {
         },
       );
 
+      toast.success("Buy Order Confirmed!")
       closeBuyWindow();
     } catch (err) {
       console.error(err);
 
-      alert(err?.response?.data?.message || "Unable to place buy order.");
+      toast.error(err?.response?.data?.message || "Unable to place buy order");
     }
   };
 
@@ -107,11 +109,12 @@ const BuyActionWindow = ({ stock, mode = "BUY" }) => {
         },
       );
 
+      toast.success("Sell Order Confirmed!");
       closeBuyWindow();
     } catch (err) {
       console.error(err);
 
-      alert(err?.response?.data?.message || "Unable to place sell order.");
+      toast.error(err?.response?.data?.message || "Unable to place sell order");
     }
   };
 
@@ -174,7 +177,8 @@ const BuyActionWindow = ({ stock, mode = "BUY" }) => {
           <div>
             {isSellMode ? (
               <button
-                className="btn btn-blue"
+                className="btn btn-blue rounded-3"
+                style={{backgroundColor: "#ff5722"}}
                 onClick={handleSellClick}
                 disabled={!isQuantityValid}
               >
@@ -182,7 +186,7 @@ const BuyActionWindow = ({ stock, mode = "BUY" }) => {
               </button>
             ) : (
               <button
-                className="btn btn-blue"
+                className="btn btn-blue rounded-3"
                 onClick={handleBuyClick}
                 disabled={!isQuantityValid}
               >
@@ -190,7 +194,7 @@ const BuyActionWindow = ({ stock, mode = "BUY" }) => {
               </button>
             )}
 
-            <Link to="" className="btn btn-grey" onClick={closeBuyWindow}>
+            <Link to="" className="btn btn-grey rounded-3" onClick={closeBuyWindow}>
               Cancel
             </Link>
           </div>

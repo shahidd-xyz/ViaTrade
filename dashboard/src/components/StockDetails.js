@@ -3,6 +3,7 @@ import axios from "axios";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import GeneralContext from "./GeneralContext";
 import StockChart from "./StockCharts";
+import { toast } from "react-toastify";
 
 import API_URL from "../config/api";
 
@@ -26,11 +27,11 @@ const StockDetails = ({ stock }) => {
       );
       await generalContext.fetchWatchlist();
 
-      alert(res.data.message);
+      toast.success(res.data.message);
     } catch (err) {
       console.error(err);
 
-      alert(err.response?.data?.message || "Unable to add stock to watchlist.");
+      toast.error(err.response?.data?.message || "Unable to add stock to watchlist");
     }
   };
 
@@ -95,7 +96,7 @@ const StockDetails = ({ stock }) => {
 
         <div className="d-flex flex-wrap gap-2">
           <button
-            className="btn rounded-2"
+            className="btn rounded-3"
             style={{ backgroundColor: "#2563eb", color: "#fff" }}
             onClick={() => generalContext.openBuyWindow(stock)}
           >
@@ -103,7 +104,7 @@ const StockDetails = ({ stock }) => {
           </button>
 
           <button
-            className="btn rounded-2"
+            className="btn rounded-3"
             style={{ backgroundColor: "#2563eb", color: "#fff" }}
             onClick={addToWatchlist}
           >

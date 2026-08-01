@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import API_URL from "../config/api";
+import { toast } from "react-toastify";
 
 function Signup() {
   const navigate = useNavigate();
@@ -38,13 +39,13 @@ function Signup() {
 
         console.log(res.data);
 
-        alert("Registration Successful");
+        toast.success("Registration Successful");
 
         // Redirect to login page
         navigate("/login");
       } catch (err) {
         console.log(err.response?.data);
-        alert(err.response?.data?.message || "Registration Failed");
+        toast.error(err.response?.data?.message || "Registration Failed");
       }
     },
   });

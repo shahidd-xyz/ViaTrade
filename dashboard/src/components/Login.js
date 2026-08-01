@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import API_URL from "../config/api";
+import { toast } from "react-toastify";
 
 
 function Login() {
@@ -29,8 +30,8 @@ function Login() {
     const errors = {};
     if (!values.username) {
       errors.username = "Username cannot be empty";
-    } else if (values.username.length < 3) {
-      errors.username = "Username must be at least 3 characters";
+    } else if (values.username.length < 5) {
+      errors.username = "Username must be at least 5 characters";
     }
 
     if (!values.password) {
@@ -49,7 +50,7 @@ function Login() {
     onSubmit: async (values, { setSubmitting }) => {
       setLoginError("");
       try {
-        const res = await axios.post(
+        await axios.post(
           `${API_URL}/login`,
           values,
           {
@@ -57,7 +58,8 @@ function Login() {
           }
         );
 
-        console.log(res.data);
+        toast.success("Login successful")
+
         setTimeout(() => {
           navigate("/");
         }, 200);
